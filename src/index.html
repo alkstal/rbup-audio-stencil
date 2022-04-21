@@ -1,0 +1,49 @@
+<!DOCTYPE html>
+<html dir="ltr" lang="en">
+  <head>
+    <meta charset="utf-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0, minimum-scale=1.0, maximum-scale=5.0" />
+    <title>Rbup Audio Stencil</title>
+
+    <script type="module" src="/build/rbup-audio-stencil.esm.js"></script>
+    <script nomodule src="/build/rbup-audio-stencil.js"></script>
+  </head>
+  <body>
+    <h3>Player with src attribute and player controls</h3>
+    <p>Native HTML controls shown just to have something to look at</p>
+    <rbup-audio id='player1' src='https://api.spreaker.com/v2/episodes/49057189/play.mp3'></rbup-audio>
+
+    <h3>Chromeless player using JavaScript API and custom controls</h3>
+    <rbup-audio id='player2' chromeless></rbup-audio>
+    <button id='play-button'>Play</button>
+    <button id='pause-button'>Pause</button>
+
+    <h3>Changing multiple attributes of player</h3>
+    <rbup-audio id='player3' chromeless></rbup-audio>
+
+    <script>
+      (async () => {
+        await customElements.whenDefined('rbup-audio');
+        const player2 = document.querySelector('#player2')
+        await player2.setup({
+          src: 'https://api.spreaker.com/v2/episodes/49057189/play.mp3'
+        })
+
+        document.querySelector('#play-button').addEventListener('click', async () => {
+          await player2.play();
+        })
+
+        document.querySelector('#pause-button').addEventListener('click', async () => {
+          await player2.stop();
+        })
+
+        const player3 = document.querySelector('#player3')
+        player3.src = 'https://api.spreaker.com/v2/episodes/49057189/play.mp3'
+        player3.chromeless = false;
+        player3.src = ''
+        player3.chromeless = true;
+      })();
+
+    </script>
+  </body>
+</html>
