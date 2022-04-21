@@ -1,4 +1,4 @@
-import { Component, h, Host, Method, Prop, Watch } from '@stencil/core';
+import { Component, Event, EventEmitter, h, Host, Method, Prop, Watch } from '@stencil/core';
 import { PlayerOptions } from '../../lib/types';
 import { PlayerCoordinator } from '../../lib/player-coordinator';
 
@@ -35,6 +35,8 @@ export class RbupAudio {
     this.playerCoordinator.src = newValue;
   }
 
+  @Event() isPlayingChanged: EventEmitter<boolean>;
+
   @Method()
   async setup(options: PlayerOptions) {
     console.log(`[Player ${this.playerCoordinator.id}]`, 'Setup called');
@@ -44,11 +46,13 @@ export class RbupAudio {
   @Method()
   async play() {
     this.playerCoordinator.play();
+    this.isPlayingChanged.emit(true);
   }
 
   @Method()
   async stop() {
     this.playerCoordinator.stop();
+    this.isPlayingChanged.emit(false);
   }
 
   componentDidRender() {

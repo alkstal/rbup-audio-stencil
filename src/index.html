@@ -37,6 +37,10 @@
           await player2.stop();
         })
 
+        player2.addEventListener('isPlayingChanged', (event) => {
+          console.log('isPlayingChangedEvent', event.detail)
+        })
+
         const player3 = document.querySelector('#player3')
         player3.src = 'https://api.spreaker.com/v2/episodes/49057189/play.mp3'
         player3.chromeless = false;

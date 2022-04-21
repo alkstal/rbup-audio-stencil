@@ -58,6 +58,7 @@ declare namespace LocalJSX {
     }
     interface RbupAudio {
         "chromeless"?: boolean;
+        "onIsPlayingChanged"?: (event: CustomEvent<boolean>) => void;
         "src"?: string;
     }
     interface IntrinsicElements {
