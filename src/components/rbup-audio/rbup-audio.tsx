@@ -18,7 +18,7 @@ export class RbupAudio {
     }
   }
 
-  @Prop()
+  @Prop({ reflect: true })
   chromeless: boolean;
 
   @Watch('chromeless')
@@ -26,7 +26,7 @@ export class RbupAudio {
     console.log(`[Player ${this.playerCoordinator.id}]`, 'chromeless changed');
   }
 
-  @Prop()
+  @Prop({ reflect: true })
   src: string;
 
   @Watch('src')
